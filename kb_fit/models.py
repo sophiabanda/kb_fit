@@ -12,6 +12,9 @@ TYPES = (
 class Exercise(models.Model):
     name = models.CharField(max_length=100)
     types = models.ManyToManyField('ExerciseType')
+    reps = models.IntegerField(default=0)
+    sets = models.IntegerField(default=0)
+    time = models.DurationField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -31,12 +34,12 @@ class Photo(models.Model):
 
 class SessionEntry(models.Model):
     date = models.DateField('Session Date')
-    hrv = models.IntegerField()
-    program_info = models.CharField(max_length=150)
+    hrv = models.IntegerField(null=True, blank=True)
+    program_info = models.CharField(max_length=150, null=True, blank=True)
     warmup = models.ManyToManyField(Exercise, related_name='warmup_sessions')
     exercise = models.ManyToManyField(Exercise, related_name='exercise_sessions')
-    rpe = models.IntegerField()
-    notes = models.TextField()
+    rpe = models.IntegerField(null=True, blank=True)
+    notes = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return f"Session Entry {self.id} on {self.date}"

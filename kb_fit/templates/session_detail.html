@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Session Focus</th>
+        <th scope="col">HRV</th>
+        <th scope="col">RPE</th>
+        <th scope="col">Notes</th>
+        <th scope="col">Warmup Exercises</th>
+        <th scope="col">Main Exercises</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-primary">
+        <th scope="row">{{ session.date }}</th>
+        <td>{{ session.program_info }}</td>
+        <td>{{ session.hrv }}</td>
+        <td>{{ session.rpe }}</td>
+        <td>{{ session.notes }}</td>
+        <td>
+          {% for warmup in session.warmup.all %}
+            {{ warmup.name }}
+          {% endfor %}
+        </td>
+        <td>
+          {% for exercise in session.exercise.all %}
+            {{ exercise.name }}
+          {% endfor %}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+{% endblock %}
