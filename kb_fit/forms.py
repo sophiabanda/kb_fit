@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Exercise, SessionEntry, ExerciseEntry
+from .models import Exercise, SessionEntry
 
 class ExerciseForm(ModelForm):
     class Meta:

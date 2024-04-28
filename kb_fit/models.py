@@ -33,20 +33,10 @@ class SessionEntry(models.Model):
     date = models.DateField('Session Date')
     hrv = models.IntegerField()
     program_info = models.CharField(max_length=150)
-    exercise = models.ManyToManyField(Exercise, through='ExerciseEntry')
+    warmup = models.ManyToManyField(Exercise, related_name='warmup_sessions')
+    exercise = models.ManyToManyField(Exercise, related_name='exercise_sessions')
     rpe = models.IntegerField()
     notes = models.TextField()
 
     def __str__(self):
         return f"Session Entry {self.id} on {self.date}"
-
-class ExerciseEntry(models.Model):
-    session_entry = models.ForeignKey(SessionEntry, on_delete=models.CASCADE)
-    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
-    sets = models.PositiveIntegerField()
-    reps = models.PositiveIntegerField()
-    weight = models.DecimalField(max_digits=10, decimal_places=2)
-    time = models.DurationField()
-
-    def __str__(self):
-        return f"{self.exercise} in Session {self.session_entry}"
