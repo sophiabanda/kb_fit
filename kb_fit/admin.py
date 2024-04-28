@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Exercise, Photo, SessionEntry, ExerciseType, ExerciseEntry
 
-# Register your models here.
+admin.site.register([Exercise, Photo, SessionEntry, ExerciseType, ExerciseEntry])
+
