@@ -9,6 +9,7 @@
         <th scope="col">Session Focus</th>
         <th scope="col">HRV</th>
         <th scope="col">RPE</th>
+        <th scope="col">Detail</th>
       </tr>
     </thead>
     <tbody>
@@ -17,6 +18,7 @@
         <td>{{ session.program_info }}</td>
         <td>{{ session.hrv }}</td>
         <td>{{ session.rpe }}</td>
+        <td><a href="{% url 'session_detail' session.pk  %}">More Info</a></td>
       </tr>
     </tbody>
   </table>

@@ -2,36 +2,46 @@
 {% block content %}
 
 <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">Date</th>
-        <th scope="col">Session Focus</th>
-        <th scope="col">HRV</th>
-        <th scope="col">RPE</th>
-        <th scope="col">Notes</th>
-        <th scope="col">Warmup Exercises</th>
-        <th scope="col">Main Exercises</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="table-primary">
-        <th scope="row">{{ session.date }}</th>
-        <td>{{ session.program_info }}</td>
-        <td>{{ session.hrv }}</td>
-        <td>{{ session.rpe }}</td>
-        <td>{{ session.notes }}</td>
-        <td>
-          {% for warmup in session.warmup.all %}
-            {{ warmup.name }}
-          {% endfor %}
-        </td>
-        <td>
-          {% for exercise in session.exercise.all %}
-            {{ exercise.name }}
-          {% endfor %}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <thead>
+    <tr>
+      <th scope="col">Date: </th>
+      <th scope="col">{{ session.date }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="table-primary">
+      <th scope="row">Warm-Ups:</th>
+      <td>
+        {% for warmup in session.warmup.all %}
+          {{ warmup }}<br>
+        {% endfor %}
+      </td>
+    </tr>
+    <tr class="table-primary">
+      <th scope="row">Exercises:</th>
+      <td>
+        {% for exercise in session.exercise.all %}
+          {{ exercise }}<br>
+        {% endfor %}
+      </td>
+    </tr>
+    <tr class="table-primary">
+      <th scope="row">HRV:</th>
+      <th scope="row">{{ session.hrv }}</th>
+    </tr>
+    <tr class="table-primary">
+      <th scope="row">RPE:</th>
+      <th scope="row">{{ session.rpe }}</th>
+    </tr>
+    <tr class="table-primary">
+      <th scope="row">HRV:</th>
+      <th scope="row">{{ session.hrv }}</th>
+    </tr>
+    <tr class="table-primary">
+      <th scope="row">Notes:</th>
+      <th scope="row">{{ session.notes }}</th>
+    </tr>
+  </tbody>
+</table>
 
 {% endblock %}
