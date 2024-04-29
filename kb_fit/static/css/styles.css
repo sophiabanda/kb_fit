@@ -6,10 +6,11 @@
   background-color: gray;
   color: white;
   text-align: center;
+
 }
 
 #plus-sign {
-    font-size: 15px;
-    
-    color: whitesmoke
+    color: whitesmoke;
+    font-size: 20px;
+    font-weight: bold;
 }

@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% for session in sessions  %}
 <table class="table table-hover">
     <thead>
       <tr>
@@ -13,15 +12,16 @@
       </tr>
     </thead>
     <tbody>
+      {% for session in sessions  %}
       <tr class="table-primary">
-        <th scope="row">{{ session.date }}</th>
-        <td>{{ session.program_info }}</td>
-        <td>{{ session.hrv }}</td>
-        <td>{{ session.rpe }}</td>
+        <th scope="row"><a href="{% url 'session_detail' session.pk  %}">{{ session.date }}</a></th>
+        <td><a href="{% url 'session_detail' session.pk  %}">{{ session.program_info }}</a></td>
+        <td><a href="{% url 'session_detail' session.pk  %}">{{ session.hrv }}</a></td>
+        <td><a href="{% url 'session_detail' session.pk  %}">{{ session.rpe }}</a></td>
         <td><a href="{% url 'session_detail' session.pk  %}">More Info</a></td>
       </tr>
+      {% endfor %}
     </tbody>
-  </table>
-{% endfor %}
+</table>
 
 {% endblock %}
