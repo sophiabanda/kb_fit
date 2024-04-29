@@ -14,11 +14,11 @@
     <tbody>
       {% for session in sessions  %}
       <tr class="table-primary">
-        <th scope="row"><a href="{% url 'session_detail' session.pk  %}">{{ session.date }}</a></th>
-        <td><a href="{% url 'session_detail' session.pk  %}">{{ session.program_info }}</a></td>
-        <td><a href="{% url 'session_detail' session.pk  %}">{{ session.hrv }}</a></td>
-        <td><a href="{% url 'session_detail' session.pk  %}">{{ session.rpe }}</a></td>
-        <td><a href="{% url 'session_detail' session.pk  %}">More Info</a></td>
+        <th scope="row"><a class="text-decoration-none" href="{% url 'session_detail' session.pk  %}">{{ session.date }}</a></th>
+        <td><a class="text-decoration-none" href="{% url 'session_detail' session.pk  %}">{{ session.program_info }}</a></td>
+        <td><a class="text-decoration-none" href="{% url 'session_detail' session.pk  %}">{{ session.hrv }}</a></td>
+        <td><a class="text-decoration-none" href="{% url 'session_detail' session.pk  %}">{{ session.rpe }}</a></td>
+        <td><a class="text-decoration-none" href="{% url 'session_detail' session.pk  %}">More Info</a></td>
       </tr>
       {% endfor %}
     </tbody>
