@@ -7,6 +7,11 @@ class ExerciseForm(forms.ModelForm):
     sets = forms.IntegerField()
     time = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder': 'Note your time', 'size': '20'}))
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['reps'].required = False
+        self.fields['sets'].required = False
+        
     class Meta:
         model = Exercise
         fields = ['exercise', 'reps', 'sets', 'time']

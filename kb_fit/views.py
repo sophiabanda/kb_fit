@@ -56,3 +56,20 @@ class SessionUpdate(UpdateView):
 class SessionDelete(DeleteView):
     model = SessionEntry
     success_url = '/sessions/'
+
+class ExerciseCreate(CreateView):
+    model = Exercise
+    fields = '__all__'
+
+    def form_invalid(self, form):
+        print(form.errors)
+        return super().form_invalid(form)
+
+    def get_success_url(self):
+        return reverse('exercise_list')
+    
+class ExerciseDelete(DeleteView):
+    model = Exercise
+
+    def get_success_url(self):
+        return reverse('exercise_list') 
