@@ -36,7 +36,10 @@ def session_create(request):
                 exercise = exercise_form.save(commit=False)
                 exercise.session_entry = session_entry
                 exercise.save()
-            return redirect('session_detail', session_id=session_entry.id)
+            return redirect('session_detail', pk=session_entry.id)
+        else:
+            print(form.errors)
+            print(exercise_formset.errors)
     else:
         form = CombinedForm()
         exercise_formset = ExerciseFormSet(prefix='exercises')

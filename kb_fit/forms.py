@@ -5,18 +5,18 @@ class ExerciseForm(forms.ModelForm):
     exercise = forms.ModelChoiceField(queryset=Exercise.objects.all())
     reps = forms.IntegerField()
     sets = forms.IntegerField()
-    time = forms.TimeField()
+    time = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder': 'Enter notes for time', 'size': '20'}))
 
     class Meta:
         model = Exercise
         fields = ['exercise', 'reps', 'sets', 'time']
 
 class CombinedForm(forms.ModelForm):
-    date = forms.DateField()
-    program_info = forms.CharField()
-    hrv = forms.IntegerField()
-    rpe = forms.IntegerField()
-    notes = forms.TextInput()
+    date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+    program_info = forms.CharField(required=False)
+    hrv = forms.IntegerField(required=False)
+    rpe = forms.IntegerField(required=False)
+    notes = forms.CharField(required=False, widget=forms.Textarea)
 
     class Meta:
         model = SessionEntry
