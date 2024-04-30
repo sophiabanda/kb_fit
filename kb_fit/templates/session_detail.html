@@ -39,5 +39,10 @@
     </tr>
   </tbody>
 </table>
-
+<a class="text-decoration-none" href="{% url 'session_update' session.pk %}">
+  <button type="button" class="btn btn-info">Edit</button>
+</a>
+<a class="text-decoration-none" href="{% url 'session_delete' session.pk %}">
+  <button type="button" class="btn btn-danger">Delete</button>
+</a>
 {% endblock %}

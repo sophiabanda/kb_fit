@@ -4,6 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.forms import formset_factory
 from .forms import ExerciseForm, CombinedForm
+from django.urls import reverse
 
 def home(request):
     sessions = SessionEntry.objects.all()
@@ -44,3 +45,14 @@ def session_create(request):
         form = CombinedForm()
         exercise_formset = ExerciseFormSet(prefix='exercises')
     return render(request, 'session_create.html', {'form': form, 'exercise_formset': exercise_formset})
+
+class SessionUpdate(UpdateView):
+    model = SessionEntry
+    fields = '__all__'
+
+    def get_success_url(self):
+        return reverse('session_detail', args=[str(self.object.id)])
+
+class SessionDelete(DeleteView):
+    model = SessionEntry
+    success_url = '/sessions/'
