@@ -6,7 +6,7 @@
     {% csrf_token %}
     {{ form.as_p }}
 
-    {{ exercise_formset.management_form }}
+ {{ exercise_formset.management_form }}
     {% for exercise_form in exercise_formset %}
     <div class="row">
         <label for="{{ exercise_form.exercise.id_for_label }}" class="col-sm-2 col-form-label">Exercise</label>

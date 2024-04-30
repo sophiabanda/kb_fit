@@ -37,6 +37,9 @@ def session_create(request):
                 exercise.session_entry = session_entry
                 exercise.save()
             return redirect('session_detail', session_id=session_entry.id)
+        else:
+            print(form.errors)
+            print(exercise_formset.errors)
     else:
         form = CombinedForm()
         exercise_formset = ExerciseFormSet(prefix='exercises')
