@@ -1,58 +1,59 @@
 {% extends "base.html" %}
 {% block content %}
-
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">Date: </th>
-      <th scope="col">{{ session.date }}</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% if session.warmup.all.exists %}
-    <tr class="table-primary">
-      <th scope="row">Warm-Ups:</th>
-      <td>
-        {% for warmup in session.warmup.all %}
-          {{ warmup|upper }}<br>
-        {% endfor %}
-      </td>
-    </tr>
-    {% else %}
-    <tr class="table-primary">
-      <th scope="row">Warm-Ups:</th>
-      <td>You'd better warm up next time 😠</td>
-    {% endif %}
-    <tr class="table-primary">
-      <th scope="row">Exercises:</th>
-      <td>
-          {% for exercise in session.exercise.all %}
-            Exercise: {{ exercise.name|upper }}<br>
-            Reps: {{ exercise.reps }}<br>
-            Sets: {{ exercise.sets }}<br>
-            Time: {{ exercise.time }}<br>
-            <hr>
+<div style="margin-bottom: 4vh;">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Date: </th>
+        <th scope="col">{{ session.date }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if session.warmup.all.exists %}
+      <tr class="table-primary">
+        <th scope="row">Warm-Ups:</th>
+        <td>
+          {% for warmup in session.warmup.all %}
+            {{ warmup|upper }}<br>
           {% endfor %}
-      </td>
-    </tr>
-    <tr class="table-primary">
-      <th scope="row">RPE:</th>
-      <th scope="row">{{ session.rpe }}</th>
-    </tr>
-    <tr class="table-primary">
-      <th scope="row">HRV:</th>
-      <th scope="row">{{ session.hrv }}</th>
-    </tr>
-    <tr class="table-primary">
-      <th scope="row">Notes:</th>
-      <th scope="row"><span style="font-size:1.5vw">{{ session.notes }}</span></th>
-    </tr>
-  </tbody>
-</table>
-<a class="text-decoration-none" href="{% url 'session_update' session.pk %}">
-  <button type="button" class="btn btn-info">Edit</button>
-</a>
-<a class="text-decoration-none" href="{% url 'session_delete' session.pk %}">
-  <button type="button" class="btn btn-danger">Delete</button>
-</a>
+        </td>
+      </tr>
+      {% else %}
+      <tr class="table-primary">
+        <th scope="row">Warm-Ups:</th>
+        <td>You'd better warm up next time 😠</td>
+      {% endif %}
+      <tr class="table-primary">
+        <th scope="row">Exercises:</th>
+        <td>
+            {% for exercise in session.exercise.all %}
+              Exercise: {{ exercise.name|upper }}<br>
+              Reps: {{ exercise.reps }}<br>
+              Sets: {{ exercise.sets }}<br>
+              Time: {{ exercise.time }}<br>
+              <hr>
+            {% endfor %}
+        </td>
+      </tr>
+      <tr class="table-primary">
+        <th scope="row">RPE:</th>
+        <th scope="row">{{ session.rpe }}</th>
+      </tr>
+      <tr class="table-primary">
+        <th scope="row">HRV:</th>
+        <th scope="row">{{ session.hrv }}</th>
+      </tr>
+      <tr class="table-primary">
+        <th scope="row">Notes:</th>
+        <th scope="row"><span style="font-size:1.5vw">{{ session.notes }}</span></th>
+      </tr>
+    </tbody>
+  </table>
+  <a class="text-decoration-none" href="{% url 'session_update' session.pk %}">
+    <button type="button" class="btn btn-primary">Edit</button>
+  </a>
+  <a class="text-decoration-none" href="{% url 'session_delete' session.pk %}">
+    <button type="button" class="btn btn-danger">Delete</button>
+  </a>
+</div>
 {% endblock %}
