@@ -15,7 +15,7 @@
       {% for session in sessions  %}
       <tr class="table-primary">
         <th scope="row"><a class="text-decoration-none" href="{% url 'session_detail' session.pk  %}">{{ session.date|date:"l, F j, Y" }}</a></th>
-        <td><a class="text-decoration-none" href="{% url 'session_detail' session.pk  %}">{{ session.program_info }}</a></td>
+        <td><a class="text-decoration-none" href="{% url 'session_detail' session.pk  %}">{{ session.program_info|upper }}</a></td>
         <td><a class="text-decoration-none" href="{% url 'session_detail' session.pk  %}">{{ session.hrv }}</a></td>
         <td><a class="text-decoration-none" href="{% url 'session_detail' session.pk  %}">{{ session.rpe }}</a></td>
         <td><a class="text-decoration-none" href="{% url 'session_detail' session.pk  %}">More Info</a></td>
