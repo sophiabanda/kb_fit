@@ -4,16 +4,16 @@
 <ul class="list-group">
 {% for exercise in exercises %}
   <li class="list-group-item justify-content-between align-items-center">
-    {{ exercise|upper }}
+    <a class="text-decoration-none" href="{% url 'exercise_detail' exercise.id %}">{{ exercise|upper }}</a>
       {% for type in exercise.types.all %}
         <span class="badge bg-primary rounded-pill float-end">{{ type }}</span>
       {% endfor %}
   </li>
   {% endfor %}
 </ul>
-<div style="justify-content:center;">
+<div style="text-align:center;margin-top:3vh;">
   <a href="{% url 'exercise_create' %}">
-    <button type="button" class="btn btn-outline-secondary position-absolute top-50 start-50 translate-middle">Add an Exercise</button>
+    <button type="button" class="btn btn-outline-secondary">Add an Exercise</button>
   </a>
 </div>
 

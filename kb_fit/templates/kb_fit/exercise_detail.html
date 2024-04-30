@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">{{ exercise }}</h4>
+        <h6 class="card-subtitle mb-2 text-muted">This exercise can be used for:</h6>
+        <ul>
+            {% for type in exercise.types.all %}
+            <li>{{type}}</li>
+            {% endfor %}
+        </ul>
+      <a href="#" class="text-decoration-none card-link">
+        <button type="button" class="btn-sm btn btn-dark">Modify</button>
+      </a>
+      <a href="#" class="text-decoration-none card-link">
+        <button type="button" class="btn-sm btn btn-danger">Delete</button>
+      </a>
+    </div>
+  </div>
+
+{% endblock %}

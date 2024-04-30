@@ -66,10 +66,21 @@ class ExerciseCreate(CreateView):
         return super().form_invalid(form)
 
     def get_success_url(self):
-        return reverse('exercise_list')
+        return reverse('library')
     
 class ExerciseDelete(DeleteView):
     model = Exercise
 
     def get_success_url(self):
-        return reverse('exercise_list') 
+        return reverse('library') 
+    
+class ExerciseDetail(DetailView):
+    model = Exercise
+    context_object_name = 'exercise'
+
+class ExerciseUpdate(UpdateView):
+    model = Exercise
+    fields = ['name', 'types']
+
+    def get_success_url(self):
+        return reverse('library')
