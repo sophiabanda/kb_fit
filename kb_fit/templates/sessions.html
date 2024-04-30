@@ -6,9 +6,6 @@
       <tr>
         <th scope="col">Date</th>
         <th scope="col">Session Focus</th>
-        <th scope="col">HRV</th>
-        <th scope="col">RPE</th>
-        <th scope="col">Details</th>
       </tr>
     </thead>
     <tbody>
@@ -16,9 +13,6 @@
       <tr class="table-primary">
         <th scope="row"><a class="text-decoration-none" href="{% url 'session_detail' session.pk  %}">{{ session.date|date:"l, F j, Y" }}</a></th>
         <td><a class="text-decoration-none" href="{% url 'session_detail' session.pk  %}">{{ session.program_info|upper }}</a></td>
-        <td><a class="text-decoration-none" href="{% url 'session_detail' session.pk  %}">{{ session.hrv }}</a></td>
-        <td><a class="text-decoration-none" href="{% url 'session_detail' session.pk  %}">{{ session.rpe }}</a></td>
-        <td><a class="text-decoration-none" href="{% url 'session_detail' session.pk  %}">More Info</a></td>
       </tr>
       {% endfor %}
     </tbody>

@@ -9,20 +9,30 @@
     </tr>
   </thead>
   <tbody>
+    {% if session.warmup.all.exists %}
     <tr class="table-primary">
       <th scope="row">Warm-Ups:</th>
       <td>
         {% for warmup in session.warmup.all %}
-          {{ warmup }}<br>
+          {{ warmup|upper }}<br>
         {% endfor %}
       </td>
     </tr>
+    {% else %}
+    <tr class="table-primary">
+      <th scope="row">Warm-Ups:</th>
+      <td>You'd better warm up next time 😠</td>
+    {% endif %}
     <tr class="table-primary">
       <th scope="row">Exercises:</th>
       <td>
-        {% for exercise in session.exercise.all %}
-          {{ exercise }}<br>
-        {% endfor %}
+          {% for exercise in session.exercise.all %}
+            Exercise: {{ exercise.name|upper }}<br>
+            Reps: {{ exercise.reps }}<br>
+            Sets: {{ exercise.sets }}<br>
+            Time: {{ exercise.time }}<br>
+            <hr>
+          {% endfor %}
       </td>
     </tr>
     <tr class="table-primary">
