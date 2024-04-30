@@ -5,7 +5,7 @@ class ExerciseForm(forms.ModelForm):
     exercise = forms.ModelChoiceField(queryset=Exercise.objects.all())
     reps = forms.IntegerField()
     sets = forms.IntegerField()
-    time = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder': 'Enter notes for time', 'size': '20'}))
+    time = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder': 'Note your time', 'size': '20'}))
 
     class Meta:
         model = Exercise
