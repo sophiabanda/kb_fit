@@ -16,7 +16,7 @@ class CombinedForm(forms.ModelForm):
     program_info = forms.CharField()
     hrv = forms.IntegerField()
     rpe = forms.IntegerField()
-    notes = forms.CharField()
+    notes = forms.TextInput()
 
     class Meta:
         model = SessionEntry
