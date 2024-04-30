@@ -2,7 +2,7 @@
 
 {% block content %}
   {% if object %}
-    <h1>Edit {{object.name}}</h1>
+    <h1>Edit <span style="color:gray">{{object.name}}</span></h1>
   {% else %}
     <h1>Add Exercise</h1>
   {% endif %}
@@ -10,11 +10,15 @@
     {% csrf_token %}
     <table>
         {% for field in form %}
-        {% if field.name != 'reps' and field.name != 'sets' and field.name != 'time' %}
-        <tr><th>{{ field.label }}</th><td>{{ field }}</td></tr>
-        {% endif %}
+          {% if field.name != 'reps' and field.name != 'sets' and field.name != 'time' %}
+            <tr><th>{{ field.label }}</th><td>{{ field }}</td></tr>
+          {% endif %}
         {% endfor %}
     </table>
-    <button type="submit" class="btn btn-primary">Create</button>
+    {% if object %}
+      <button type="submit" class="btn btn-primary">Update</button>
+        {% else %}
+      <button type="submit" class="btn btn-primary">Create</button>
+    {% endif %}
   </form>
 {% endblock %}

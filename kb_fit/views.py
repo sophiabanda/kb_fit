@@ -71,6 +71,10 @@ class ExerciseCreate(CreateView):
 class ExerciseDelete(DeleteView):
     model = Exercise
 
+    def form_invalid(self, form):
+        print(form.errors)
+        return super().form_invalid(form)
+
     def get_success_url(self):
         return reverse('library') 
     
