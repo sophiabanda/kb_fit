@@ -2,13 +2,13 @@
 {% load widget_tweaks %}
 {% block content %}
 
-<form method="post">
+<form class="form" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+   {{ form.as_p }}
 
  {{ exercise_formset.management_form }}
     {% for exercise_form in exercise_formset %}
-    <div class="row">
+    <div class="row form">
         <label for="{{ exercise_form.exercise.id_for_label }}" class="col-sm-2 col-form-label">Exercise</label>
         <div class="col-sm-10">
             {{ exercise_form.exercise }}
