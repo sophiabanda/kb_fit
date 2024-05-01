@@ -10,7 +10,7 @@
             <li>{{type}}</li>
             {% endfor %}
         </ul>
-        {% if user.is_authenticated %}
+        {% if user.is_authenticated and exercise.user == user %}
             <div style="display: flex; gap: 10px;">
                 <a href="{% url 'exercise_update' exercise.id %}" class="text-decoration-none card-link">
                     <button type="button" class="btn-sm btn btn-dark">Modify</button>

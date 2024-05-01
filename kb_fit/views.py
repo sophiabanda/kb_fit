@@ -8,11 +8,13 @@ from django.urls import reverse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def home(request):
     sessions = SessionEntry.objects.all()
     return render(request, 'home.html', {'sessions': sessions})
 
+@login_required
 def sessions(request):
     sessions = SessionEntry.objects.filter(user=request.user)
     return render(request, 'sessions.html', {'sessions': sessions})
@@ -29,6 +31,7 @@ class SessionDetail(DetailView):
     
 ExerciseFormSet = formset_factory(ExerciseForm, extra=10)
 
+@login_required
 def session_create(request):
     if request.method == 'POST':
         form = CombinedForm(request.POST)
@@ -50,18 +53,18 @@ def session_create(request):
         exercise_formset = ExerciseFormSet(prefix='exercises')
     return render(request, 'session_create.html', {'form': form, 'exercise_formset': exercise_formset})
 
-class SessionUpdate(UpdateView):
+class SessionUpdate(LoginRequiredMixin, UpdateView):
     model = SessionEntry
     fields = '__all__'
 
     def get_success_url(self):
         return reverse('session_detail', args=[str(self.object.id)])
 
-class SessionDelete(DeleteView):
+class SessionDelete(LoginRequiredMixin, DeleteView):
     model = SessionEntry
     success_url = '/sessions/'
 
-class ExerciseCreate(CreateView):
+class ExerciseCreate(LoginRequiredMixin, CreateView):
     model = Exercise
     fields = '__all__'
 
@@ -72,7 +75,7 @@ class ExerciseCreate(CreateView):
     def get_success_url(self):
         return reverse('library')
     
-class ExerciseDelete(DeleteView):
+class ExerciseDelete(LoginRequiredMixin, DeleteView):
     model = Exercise
 
     def form_invalid(self, form):
@@ -82,11 +85,11 @@ class ExerciseDelete(DeleteView):
     def get_success_url(self):
         return reverse('library') 
     
-class ExerciseDetail(DetailView):
+class ExerciseDetail(LoginRequiredMixin, DetailView):
     model = Exercise
     context_object_name = 'exercise'
 
-class ExerciseUpdate(UpdateView):
+class ExerciseUpdate(LoginRequiredMixin, UpdateView):
     model = Exercise
     fields = ['name', 'types']
 
