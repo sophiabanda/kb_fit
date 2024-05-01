@@ -7,7 +7,7 @@
         <h6 class="card-subtitle mb-2 text-muted">This exercise can be used for:</h6>
         <ul>
             {% for type in exercise.types.all %}
-            <li>{{type}}</li>
+            <li>{{ type }}</li>
             {% endfor %}
         </ul>
         {% if user.is_authenticated and exercise.user == user %}
