@@ -5,13 +5,16 @@ from django.views.generic import ListView, DetailView
 from django.forms import formset_factory
 from .forms import ExerciseForm, CombinedForm
 from django.urls import reverse
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     sessions = SessionEntry.objects.all()
     return render(request, 'home.html', {'sessions': sessions})
 
 def sessions(request):
-    sessions = SessionEntry.objects.all()
+    sessions = SessionEntry.objects.filter(user=request.user)
     return render(request, 'sessions.html', {'sessions': sessions})
 
 class ExerciseList(ListView):
@@ -89,3 +92,17 @@ class ExerciseUpdate(UpdateView):
 
     def get_success_url(self):
         return reverse('library')
+    
+def signup(request):
+    error_message = ''
+    form = UserCreationForm()
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('/')
+        else:
+            error_message = 'Invalid signup - try again'
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)

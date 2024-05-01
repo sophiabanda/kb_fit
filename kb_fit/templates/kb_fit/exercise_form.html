@@ -11,7 +11,7 @@
     {% csrf_token %}
     <table class="table">
         {% for field in form %}
-          {% if field.name != 'reps' and field.name != 'sets' and field.name != 'time' %}
+          {% if field.name != 'reps' and field.name != 'sets' and field.name != 'time' and field.name != 'user' %}
             <tr><th>{{ field.label }}</th><td>{{ field }}</td></tr>
           {% endif %}
         {% endfor %}
