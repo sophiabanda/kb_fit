@@ -1,24 +1,40 @@
 {% extends 'base.html' %}
-
 {% block content %}
+
+<div style="padding:50px 100px 50px 100px;">
   {% if object %}
-    <h1>Edit <span style="color:gray">{{object.name}}</span></h1>
+    <h1 style="text-align:center;">Edit <span style="color:gray">{{object.name}}</span></h1>
   {% else %}
-    <h1>Add Exercise</h1>
+    <h1 style="text-align:center;">Add Exercise</h1>
   {% endif %}
   <form action="" method="post">
     {% csrf_token %}
-    <table>
+    <table class="table">
         {% for field in form %}
           {% if field.name != 'reps' and field.name != 'sets' and field.name != 'time' %}
             <tr><th>{{ field.label }}</th><td>{{ field }}</td></tr>
           {% endif %}
         {% endfor %}
     </table>
-    {% if object %}
-      <button type="submit" class="btn btn-primary">Update</button>
-        {% else %}
-      <button type="submit" class="btn btn-primary">Create</button>
-    {% endif %}
+    <div style="text-align:center;">
+      {% if object %}
+        <button type="submit" class="btn btn-primary">Update</button>
+          {% else %}
+        <button type="submit" class="btn btn-primary">Create</button>
+      {% endif %}
+    </div>
   </form>
+</div>
+
 {% endblock %}
+
+<div>
+  <label for="exampleSelect2" class="form-label mt-4">Example multiple select</label>
+  <select multiple="" class="form-select" id="exampleSelect2">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+    <option>5</option>
+  </select>
+</div>
