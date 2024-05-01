@@ -32,6 +32,7 @@ def session_create(request):
         exercise_formset = ExerciseFormSet(request.POST, prefix='exercises')
         if form.is_valid() and exercise_formset.is_valid():
             session_entry = form.save(commit=False)
+            session_entry.user = request.user
             session_entry.save()
             for exercise_form in exercise_formset:
                 exercise = exercise_form.save(commit=False)
@@ -61,9 +62,9 @@ class ExerciseCreate(CreateView):
     model = Exercise
     fields = '__all__'
 
-    def form_invalid(self, form):
-        print(form.errors)
-        return super().form_invalid(form)
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('library')

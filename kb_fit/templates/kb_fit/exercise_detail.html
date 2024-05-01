@@ -10,15 +10,17 @@
             <li>{{type}}</li>
             {% endfor %}
         </ul>
-        <div style="display: flex; gap: 10px;">
-            <a href="{% url 'exercise_update' exercise.id %}" class="text-decoration-none card-link">
-                <button type="button" class="btn-sm btn btn-dark">Modify</button>
-            </a>
-            <form method="POST" action="{% url 'exercise_delete' exercise.id %}">
-                {% csrf_token %}
-                <button type="submit" class="btn-sm btn btn-danger">Delete</button>
-            </form>
-        </div>
+        {% if user.is_authenticated %}
+            <div style="display: flex; gap: 10px;">
+                <a href="{% url 'exercise_update' exercise.id %}" class="text-decoration-none card-link">
+                    <button type="button" class="btn-sm btn btn-dark">Modify</button>
+                </a>
+                <form method="POST" action="{% url 'exercise_delete' exercise.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-sm btn btn-danger">Delete</button>
+                </form>
+            </div>
+        {% endif %}
     </div>
 </div>
 
