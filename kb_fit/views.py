@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .models import Exercise, SessionEntry
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -41,10 +42,12 @@ def session_create(request):
             session_entry.user = request.user
             session_entry.save()
             for exercise_form in exercise_formset:
-                exercise = exercise_form.save(commit=False)
-                exercise.session_entry = session_entry
-                exercise.save()
-            return redirect('session_detail', pk=session_entry.id)
+                if exercise_form.has_changed():  # Only save forms that have been changed
+                    exercise = exercise_form.save(commit=False)
+                    exercise.session_entry = session_entry
+                    exercise.user = request.user
+                    exercise.save()
+            return redirect('session_detail', pk=session_entry.id)  # This line should be unindented
         else:
             print(form.errors)
             print(exercise_formset.errors)
@@ -66,11 +69,15 @@ class SessionDelete(LoginRequiredMixin, DeleteView):
 
 class ExerciseCreate(LoginRequiredMixin, CreateView):
     model = Exercise
-    fields = '__all__'
+    fields = ['name', 'types']
 
-    def form_valid(self, form):
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
         form.instance.user = self.request.user
-        return super().form_valid(form)
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
 
     def get_success_url(self):
         return reverse('library')

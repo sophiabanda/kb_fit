@@ -5,6 +5,7 @@
 <div style="margin-bottom: 4vh;">
     <form class="form-control"  method="post">
         <div class="" style="padding:25px">
+            {% csrf_token %}
             {{ form.as_p }}
         </div>
         <div for="exercise-formset">
