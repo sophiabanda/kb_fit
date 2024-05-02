@@ -9,12 +9,12 @@
       </tr>
     </thead>
     <tbody>
-      {% if session.warmup.all.exists %}
+      {% if session.warmups.all.exists %}
       <tr class="table-primary">
         <th scope="row">Warm-Ups:</th>
         <td>
-          {% for warmup in session.warmup.all %}
-            {{ warmup|upper }}<br>
+          {% for warmup in session.warmups.all %}
+            {{ warmup }}<br>
           {% endfor %}
         </td>
       </tr>
@@ -26,9 +26,9 @@
       <tr class="table-primary">
         <th scope="row">Exercises:</th>
         <td>
-            {% for exercise in session.exercise.all %}
+            {% for exercise in session.exercises.all %}
               Exercise: {{ exercise.name|upper }}<br>
-              Reps: {{ exercise.reps }}<br>
+              Reps: {{ exercise.reps  }}<br>
               Sets: {{ exercise.sets }}<br>
               Time: {{ exercise.time }}<br>
               <hr>

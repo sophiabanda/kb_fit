@@ -1,10 +1,9 @@
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .models import Exercise, SessionEntry
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.forms import formset_factory
-from .forms import ExerciseForm, CombinedForm
+from .forms import CombinedForm, SessionExerciseForm, SessionWarmupForm
 from django.urls import reverse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -29,32 +28,39 @@ class SessionDetail(DetailView):
     model = SessionEntry
     template_name = 'session_detail.html'
     context_object_name = 'session'
-    
-ExerciseFormSet = formset_factory(ExerciseForm, extra=10)
+
+
+SessionExerciseFormSet = formset_factory(SessionExerciseForm, extra=10)
+SessionWarmupFormSet = formset_factory(SessionWarmupForm, extra=5)
 
 @login_required
 def session_create(request):
     if request.method == 'POST':
-        form = CombinedForm(request.POST)
-        exercise_formset = ExerciseFormSet(request.POST, prefix='exercises')
-        if form.is_valid() and exercise_formset.is_valid():
-            session_entry = form.save(commit=False)
-            session_entry.user = request.user
-            session_entry.save()
+        form = CombinedForm(request.POST, user=request.user)
+        exercise_formset = SessionExerciseFormSet(request.POST, prefix='exercises')
+        warmup_formset = SessionWarmupFormSet(request.POST, prefix='warmups')
+        if form.is_valid() and exercise_formset.is_valid() and warmup_formset.is_valid():
+            session_entry = form.save()
             for exercise_form in exercise_formset:
-                if exercise_form.has_changed():  # Only save forms that have been changed
+                if exercise_form.has_changed():
                     exercise = exercise_form.save(commit=False)
-                    exercise.session_entry = session_entry
-                    exercise.user = request.user
+                    exercise.session = session_entry
                     exercise.save()
-            return redirect('session_detail', pk=session_entry.id)  # This line should be unindented
+            for warmup_form in warmup_formset:
+                if warmup_form.has_changed():
+                    warmup = warmup_form.save(commit=False)
+                    warmup.session = session_entry
+                    warmup.save()
+            return redirect('session_detail', pk=session_entry.id)
         else:
             print(form.errors)
             print(exercise_formset.errors)
+            print(warmup_formset.errors)
     else:
-        form = CombinedForm()
-        exercise_formset = ExerciseFormSet(prefix='exercises')
-    return render(request, 'session_create.html', {'form': form, 'exercise_formset': exercise_formset})
+        form = CombinedForm(user=request.user)
+        exercise_formset = SessionExerciseFormSet(prefix='exercises')
+        warmup_formset = SessionWarmupFormSet(prefix='warmups')
+    return render(request, 'session_create.html', {'form': form, 'exercise_formset': exercise_formset, 'warmup_formset': warmup_formset})
 
 class SessionUpdate(LoginRequiredMixin, UpdateView):
     model = SessionEntry
