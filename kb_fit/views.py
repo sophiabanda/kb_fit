@@ -30,14 +30,16 @@ class SessionDetail(DetailView):
     context_object_name = 'session'
 
 
-SessionExerciseFormSet = formset_factory(SessionExerciseForm, extra=1)
-SessionWarmupFormSet = formset_factory(SessionWarmupForm, extra=1)
+SessionExerciseFormSet = formset_factory(SessionExerciseForm, extra=5)
+SessionWarmupFormSet = formset_factory(SessionWarmupForm, extra=5)
 
 @login_required
 def session_create(request):
     if request.method == 'POST':
         form = CombinedForm(request.POST, user=request.user)
         print(form.is_valid())
+        # if not form.is_valid():
+        #     print(form.errors)
         exercise_formset = SessionExerciseFormSet(request.POST, prefix='exercises')
         print(exercise_formset.is_valid())
         warmup_formset = SessionWarmupFormSet(request.POST, prefix='warmups')
