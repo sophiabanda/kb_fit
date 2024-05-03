@@ -11,13 +11,17 @@ This is my first attempt at an application in Python and Django, so please be ki
 - Start up the app
 `python manage.py runserver`
 
-[Visit deployed app here](https://kettlebell-fit-1513cd41f148.herokuapp.com/)
+## [Visit deployed app here](https://kettlebell-fit-1513cd41f148.herokuapp.com/)
 
 ## Technology Used
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
 ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
 ![Bootstrap](https://img.shields.io/badge/bootstrap-%238511FA.svg?style=for-the-badge&logo=bootstrap&logoColor=white)
+
+- Styled with [Bootswatch](https://bootswatch.com/)
+
+- <a target="_blank" href="https://icons8.com/icon/ur7Wlis7nVHs/kettlebell">Kettlebell</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 
 ## Requirements
 ```
@@ -51,6 +55,4 @@ whitenoise==6.6.0
 ### Upcoming Features
 - Searchability across the entire app
 - Data comparison
-
-
-<a target="_blank" href="https://icons8.com/icon/ur7Wlis7nVHs/kettlebell">Kettlebell</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+- Home page animations
