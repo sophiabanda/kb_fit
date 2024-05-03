@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div style="margin:50px;">
+<div style='margin:50px;'>
   <h1>Sign Up</h1>
-  <p class="red-text">{{ error_message }}</p>
-  <form method="POST" action="{% url 'signup' %}">
+  <p class='red-text'>{{ error_message }}</p>
+  <form method='POST' action='{% url 'signup' %}'>
     {% csrf_token %}
       {{ form.as_p }}
-    <input type="submit" class="btn btn-outline-secondary" value="Sign Up">
+    <input type='submit' class='btn btn-outline-secondary' value='Sign Up'>
   </form>
 </div>
 

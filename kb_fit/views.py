@@ -29,7 +29,6 @@ class SessionDetail(DetailView):
     template_name = 'session_detail.html'
     context_object_name = 'session'
 
-
 SessionExerciseFormSet = formset_factory(SessionExerciseForm, extra=5)
 SessionWarmupFormSet = formset_factory(SessionWarmupForm, extra=5)
 
@@ -38,8 +37,6 @@ def session_create(request):
     if request.method == 'POST':
         form = CombinedForm(request.POST, user=request.user)
         print(form.is_valid())
-        # if not form.is_valid():
-        #     print(form.errors)
         exercise_formset = SessionExerciseFormSet(request.POST, prefix='exercises')
         print(exercise_formset.is_valid())
         warmup_formset = SessionWarmupFormSet(request.POST, prefix='warmups')
@@ -65,7 +62,6 @@ def session_create(request):
         exercise_formset = SessionExerciseFormSet(prefix='exercises')
         warmup_formset = SessionWarmupFormSet(prefix='warmups')
     return render(request, 'session_create.html', {'form': form, 'exercise_formset': exercise_formset, 'warmup_formset': warmup_formset})
-
 
 class SessionUpdate(LoginRequiredMixin, UpdateView):
     model = SessionEntry
