@@ -30,37 +30,40 @@ class SessionDetail(DetailView):
     context_object_name = 'session'
 
 
-SessionExerciseFormSet = formset_factory(SessionExerciseForm, extra=10)
-SessionWarmupFormSet = formset_factory(SessionWarmupForm, extra=5)
+SessionExerciseFormSet = formset_factory(SessionExerciseForm, extra=1)
+SessionWarmupFormSet = formset_factory(SessionWarmupForm, extra=1)
 
 @login_required
 def session_create(request):
     if request.method == 'POST':
         form = CombinedForm(request.POST, user=request.user)
+        print(form.is_valid())
         exercise_formset = SessionExerciseFormSet(request.POST, prefix='exercises')
+        print(exercise_formset.is_valid())
         warmup_formset = SessionWarmupFormSet(request.POST, prefix='warmups')
-        if form.is_valid() and exercise_formset.is_valid() and warmup_formset.is_valid():
-            session_entry = form.save()
-            for exercise_form in exercise_formset:
-                if exercise_form.has_changed():
-                    exercise = exercise_form.save(commit=False)
-                    exercise.session = session_entry
-                    exercise.save()
-            for warmup_form in warmup_formset:
-                if warmup_form.has_changed():
-                    warmup = warmup_form.save(commit=False)
-                    warmup.session = session_entry
-                    warmup.save()
-            return redirect('session_detail', pk=session_entry.id)
-        else:
-            print(form.errors)
-            print(exercise_formset.errors)
-            print(warmup_formset.errors)
+        print(warmup_formset.is_valid())
+        session_entry = form.save()
+        print('session entry: ', session_entry)
+        for exercise_form in exercise_formset:
+            if exercise_form.has_changed():
+                exercise = exercise_form.save(commit=False)
+                exercise.session = session_entry
+                exercise.save()
+                print('exercise: ', exercise)
+        for warmup_form in warmup_formset:
+            if warmup_form.has_changed():
+                warmup = warmup_form.save(commit=False)
+                warmup.session = session_entry
+                warmup.save()
+                print('warmup: ', warmup)
+        return redirect('session_detail', pk=session_entry.id)
+     
     else:
         form = CombinedForm(user=request.user)
         exercise_formset = SessionExerciseFormSet(prefix='exercises')
         warmup_formset = SessionWarmupFormSet(prefix='warmups')
     return render(request, 'session_create.html', {'form': form, 'exercise_formset': exercise_formset, 'warmup_formset': warmup_formset})
+
 
 class SessionUpdate(LoginRequiredMixin, UpdateView):
     model = SessionEntry

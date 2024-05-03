@@ -46,7 +46,7 @@ class SessionEntry(models.Model):
     
 class SessionExercise(models.Model):
     session = models.ForeignKey('SessionEntry', on_delete=models.CASCADE)
-    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    exercise = models.ForeignKey(Exercise, null=True, blank=True, on_delete=models.CASCADE)
     reps = models.IntegerField(null=True, blank=True, default=0)
     sets = models.IntegerField(null=True, blank=True, default=0)
     time = models.CharField(max_length=50, null=True, blank=True)
@@ -56,7 +56,7 @@ class SessionExercise(models.Model):
 
 class SessionWarmup(models.Model):
     session = models.ForeignKey('SessionEntry', on_delete=models.CASCADE)
-    warmup = models.ForeignKey(Warmup, on_delete=models.CASCADE)
+    warmup = models.ForeignKey(Warmup, null=True, blank=True, on_delete=models.CASCADE)
     reps = models.IntegerField(null=True, blank=True, default=0)
     sets = models.IntegerField(null=True, blank=True, default=0)
     time = models.CharField(max_length=50, null=True, blank=True)
