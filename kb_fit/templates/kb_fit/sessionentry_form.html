@@ -2,27 +2,29 @@
 {% load widget_tweaks %}
 {% block content %}
 
-<form class="form" method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-
-
-  {{ warmup_formset.management_form }}
-  {% for form in warmup_formset.forms %}
-    <div class="warmup-formset">
-      {{ form.as_p }}
-    </div>
-  {% endfor %}
-
-
-  {{ exercise_formset.management_form }}
-  {% for form in exercise_formset.forms %}
-    <div class="exercise-formset">
-      {{ form.as_p }}
-    </div>
-  {% endfor %}
-
-  <button type="submit" class="btn btn-primary">Update Session</button>
-</form>
+<div class="form-control">
+  <form class="form" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+  
+  
+    {{ warmup_formset.management_form }}
+    {% for form in warmup_formset.forms %}
+      <div class="warmup-formset">
+        {{ form.as_p }}
+      </div>
+    {% endfor %}
+  
+  
+    {{ exercise_formset.management_form }}
+    {% for form in exercise_formset.forms %}
+      <div class="exercise-formset">
+        {{ form.as_p }}
+      </div>
+    {% endfor %}
+  
+    <button type="submit" class="btn btn-primary">Update Session</button>
+  </form>
+</div>
 
 {% endblock %}
