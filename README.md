@@ -11,6 +11,7 @@ This is my first attempt at an application in Python and Django, so please be ki
 - Start up the app
 `python manage.py runserver`
 
+[Visit deployed app here](https://kettlebell-fit-1513cd41f148.herokuapp.com/)
 
 ## Technology Used
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
